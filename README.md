@@ -1,7 +1,12 @@
 # UniversitarioTask
 
-Trabalho referente a matéria BOOTCAMP II 
+## 1. Definição do Programa
+O ambiente acadêmico exige a gestão simultânea de múltiplas disciplinas, prazos de entrega de trabalhos e cronogramas de avaliações. A framentação destes dados, juntamente com a ausência de uma priorização, resulta em perda de prazos, falta de preparação e sobrecarga cognitiva para o estudante universitário.
 
-Sitstema direcionado para ajudar universitarios a se organizarem melhor nos estudos e prazos.
+## 2. Proposta de Solução 
+A aplicação de interface CLI(Linha de Comando) desenvolvida em C# para centralização de tarefas e compromissos acadêmicos. 
 
-O Organizador de Estudos para Universitários vem para Estudantes de graduação e pós-graduação que possuem uma rotina fragmentada entre aulas, trabalhos e estudos extra-classe.
+A solução diferencia-se ao oferecer um sistema de planejamento de carga horaria: ao registrar uma disciplina, o utilizador define seu nivel de dificuldade, e o sistema recomenda automaticamente a frequencia semanal de estudos necessária. Adicionalmente, a ferramenta organiza todas as atividades registradas com foco na criticidade cronológica, apresentando prioritariamente as entregas com prazos mais curtos.
+
+##3. Funcionalidades Principais
+
