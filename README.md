@@ -8,5 +8,18 @@ A aplicação de interface CLI(Linha de Comando) desenvolvida em C# para central
 
 A solução diferencia-se ao oferecer um sistema de planejamento de carga horaria: ao registrar uma disciplina, o utilizador define seu nivel de dificuldade, e o sistema recomenda automaticamente a frequencia semanal de estudos necessária. Adicionalmente, a ferramenta organiza todas as atividades registradas com foco na criticidade cronológica, apresentando prioritariamente as entregas com prazos mais curtos.
 
-##3. Funcionalidades Principais
+## 3. Funcionalidades Principais
+* **Gestão de Disciplinas por Complexidade:**
+  * **Nível Fácil:** Recomendação de 1 sessão de estudo semanal.
+  * **Nível Médio:** Recomendação de 2 sessões de estudos semanais.
+  * **Nível Dificil:** Recomendação de 3 sessões de estudos semanais.
+* **Registro de Atividades e Avaliações:** Cadastro detalhado de tarefas e datas de provas associadas a cada disciplina.
+* **Ordenação Inteligente de Prazos:** Listagem de compromissos organizada automaticamente da data mais próxima para a mais distante.
+* **Interface CLI:** Interação simplificada via terminal para garantir agilidade de fluxo de trabalho do estudante.
 
+## 4. Tecnologias e Boas Práticas
+* **Linguagem:** C#(.NET 8.0)
+* **Framework de Testes:** xUnit (Validação da Lógica de prazos e cálculo de frequencia de estudos).
+* **Análise Estática:** .NET Format / Analyzers (Garantia de padronização e qualidade do código).
+* **CI/CD:** GitHub Actions (Pipeline para a execução automática de testes em liting em cada commit).
+* **Versionamento:** Semântico (v10.0).
