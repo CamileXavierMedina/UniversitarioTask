@@ -32,7 +32,7 @@ A solução diferencia-se ao oferecer um sistema de planejamento de carga horari
 ###Instruções 
 1. Efetuar o clone do repositório:
    ```bash
-   git clone [https://github.com/CamileXavierMedina/UniversitarioTask]
+   git clone https://github.com/CamileXavierMedina/UniversitarioTask
    ````
 2. Aceder ao diretório do projeto:
   	```bash
@@ -49,5 +49,5 @@ Para assegurar a integridade do sistema, utilize os seguintes comandos:
 * **Verificar Formatação:** `dotnet format --verify-no-changes`
 
 ----
-### **Autor:** Camile Medina
-###**Versão:** 1.0.0
+#### **Autor:** Camile Xavier Medina
+#### **Versão:** 1.0.0
