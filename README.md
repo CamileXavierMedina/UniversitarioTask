@@ -1,21 +1,31 @@
 # UniversitarioTask
 
 ## 1. Definição do Programa
-O ambiente acadêmico exige a gestão simultânea de múltiplas disciplinas, prazos de entrega de trabalhos e cronogramas de avaliações. A framentação destes dados, juntamente com a ausência de uma priorização, resulta em perda de prazos, falta de preparação e sobrecarga cognitiva para o estudante universitário.
+O ambiente acadêmico exige a gestão simultânea de múltiplas disciplinas, prazos de entrega de trabalhos e cronogramas de avaliações. A **framentação destes dados**, juntamente com a ausência de uma priorização estratégica, resulta frequentemente em:
+* Perda de prazos criticos;
+* Falta de preparação adequada pra exames;
+* Sobrecarga cognitiva.
 
 ## 2. Proposta de Solução 
-A aplicação de interface CLI(Linha de Comando) desenvolvida em C# para centralização de tarefas e compromissos acadêmicos. 
+A **UniversitarioTask** aplicação de interface **CLI(Linha de Comando)** desenvolvida em C# para centralização de tarefas e compromissos acadêmicos. 
 
-A solução diferencia-se ao oferecer um sistema de planejamento de carga horaria: ao registrar uma disciplina, o utilizador define seu nivel de dificuldade, e o sistema recomenda automaticamente a frequencia semanal de estudos necessária. Adicionalmente, a ferramenta organiza todas as atividades registradas com foco na criticidade cronológica, apresentando prioritariamente as entregas com prazos mais curtos.
+A solução diferencia-se ao oferecer um **algoritmo de planejamento de carga horaria:** ao registrar uma disciplina, o utilizador define seu nivel de dificuldade, e o sistema recomenda automaticamente a frequencia semanal de estudos necessária. Adicionalmente, a ferramenta organiza todas as atividades por **criticidade cronológica**, apresentando prioritariamente as entregas com prazos mais curtos.
 
 ## 3. Funcionalidades Principais
-* **Gestão de Disciplinas por Complexidade:**
-  * **Nível Fácil:** Recomendação de 1 sessão de estudo semanal.
-  * **Nível Médio:** Recomendação de 2 sessões de estudos semanais.
-  * **Nível Dificil:** Recomendação de 3 sessões de estudos semanais.
-* **Registro de Atividades e Avaliações:** Cadastro detalhado de tarefas e datas de provas associadas a cada disciplina.
-* **Ordenação Inteligente de Prazos:** Listagem de compromissos organizada automaticamente da data mais próxima para a mais distante.
-* **Interface CLI:** Interação simplificada via terminal para garantir agilidade de fluxo de trabalho do estudante.
+
+### Planeamento de Carga Horária
+O sistema utiliza um algoritmo de sugestão de estudo baseado na complexidade atribuída a cada disciplina:
+
+| Nível de Dificuldade | Recomendação de Estudo | Impacto no Cronograma |
+| :--- | :--- | :--- |
+| **Fácil** | 1 Sessão semanal | Manutenção de conteúdo |
+| **Médio** | 2 Sessões semanais | Consolidação de conceitos |
+| **Difícil** | 3 Sessões semanais | Estudo intensivo e reforço |
+
+### Registo e Priorização
+* **Gestão de Compromissos:** Cadastro detalhado de tarefas e datas de provas associadas a cada disciplina.
+* **Ordenação Inteligente:** Listagem automática de atividades, priorizando as entregas com prazos mais próximos.
+* **Interface CLI:** Interação simplificada via terminal para garantir agilidade no fluxo de trabalho.
 
 ## 4. Tecnologias e Boas Práticas
 * **Linguagem:** C#(.NET 8.0)
