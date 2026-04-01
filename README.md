@@ -39,7 +39,7 @@ O sistema utiliza um algoritmo de sugestão de estudo baseado na complexidade at
 * .NET SDK 8.0 ou superior.
 * Git instalado.
 
-###Instruções 
+### Instruções 
 1. Efetuar o clone do repositório:
    ```bash
    git clone https://github.com/CamileXavierMedina/UniversitarioTask
