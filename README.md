@@ -1,3 +1,4 @@
+![.NET CI](https://github.com/CamileXavierMedina/UniversitarioTask/actions/workflows/main.yml/badge.svg)
 # UniversitarioTask
 
 ## 1. Definição do Programa
