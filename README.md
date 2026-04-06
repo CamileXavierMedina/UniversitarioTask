@@ -12,6 +12,23 @@ A **UniversitarioTask** aplicação de interface **CLI(Linha de Comando)** desen
 
 A solução diferencia-se ao oferecer um **algoritmo de planejamento de carga horaria:** ao registrar uma disciplina, o utilizador define seu nivel de dificuldade, e o sistema recomenda automaticamente a frequencia semanal de estudos necessária. Adicionalmente, a ferramenta organiza todas as atividades por **criticidade cronológica**, apresentando prioritariamente as entregas com prazos mais curtos.
 
+
+---
+```mermaid
+classDiagram
+    class Tarefa {
+        +String Nome
+        +DateTime DataEntrega
+        +NivelDificuldade Dificuldade
+    }
+    class GerenciadorEstudos {
+        +CalcularSessoes(NivelDificuldade)
+    }
+    Tarefa --> GerenciadorEstudos
+```
+---    
+
+
 ## 3. Funcionalidades Principais
 
 ### Planeamento de Carga Horária
