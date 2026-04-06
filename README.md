@@ -1,4 +1,4 @@
-![.NET CI](https://github.com/CamileXavierMedina/UniversitarioTask/actions/workflows/main.yml/badge.svg)
+![.NET CI](https://github.com/CamileXavierMedina/UniversitarioTask/actions/workflows/dotnet.yml/badge.svg)
 # UniversitarioTask
 
 ## 1. Definição do Programa
