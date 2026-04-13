@@ -2,7 +2,7 @@
 # UniversitarioTask
 
 ## 1. Definição do Programa
-O ambiente acadêmico exige a gestão simultânea de múltiplas disciplinas, prazos de entrega de trabalhos e cronogramas de avaliações. A **framentação destes dados**, juntamente com a ausência de uma priorização estratégica, resulta frequentemente em:
+O ambiente acadêmico exige a gestão simultânea de múltiplas disciplinas, prazos de entrega de trabalhos e cronogramas de avaliações. A **fragmentação destes dados**, juntamente com a ausência de uma priorização estratégica, resulta frequentemente em:
 * Perda de prazos criticos;
 * Falta de preparação adequada pra exames;
 * Sobrecarga cognitiva.
