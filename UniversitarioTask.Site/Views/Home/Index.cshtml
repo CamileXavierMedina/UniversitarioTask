@@ -1,0 +1,34 @@
+﻿@model List<UniversitarioTask.Site.Models.Tarefa>
+
+<div class="container mt-4">
+	<table class="table table-hover shadow-sm">
+		<thead class="table-dark">
+			<tr>
+				<th>Matéria</th>
+				<th>Atividade</th>
+				<th>Data</th>
+				<th>Dificuldade</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Materia</td>
+					<td>
+						
+						<a href="/Home/Detalhes?id=@item.Id" class="fw-bold text-decoration-none">
+							@item.NomeAtividade
+						</a>
+					</td>
+					<td>@item.Data.ToShortDateString()</td>
+					<td>
+						<span class="badge bg-@(item.Dificuldade == UniversitarioTask.Site.Models.NivelDificuldade.Dificil ? "danger" : (item.Dificuldade == UniversitarioTask.Site.Models.NivelDificuldade.Medio ? "warning" : "success"))">
+							@item.Dificuldade
+						</span>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

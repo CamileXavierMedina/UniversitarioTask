@@ -1,0 +1,45 @@
+﻿@model UniversitarioTask.Site.Models.Tarefa
+
+@{
+	ViewData["Title"] = "Plano de Estudo";
+	string corFundo = Model.Dificuldade == UniversitarioTask.Site.Models.NivelDificuldade.Dificil ? "danger" :
+					 (Model.Dificuldade == UniversitarioTask.Site.Models.NivelDificuldade.Medio ? "warning" : "success");
+}
+
+<div class="container mt-5">
+	<div class="card shadow-lg border-0">
+		<div class="card-header bg-dark text-white d-flex align-items-center py-3">
+			
+			<a href="javascript:void(0)" onclick="history.back()" class="text-white me-3" style="text-decoration: none;">
+				<i class="bi bi-arrow-left-short fs-2"></i>
+			</a>
+			<h4 class="mb-0 flex-grow-1 text-center" style="margin-left: -40px;">📋 Detalhes: @Model.Dificuldade</h4>
+		</div>
+
+		<div class="card-body p-4">
+			<div class="row">
+				<div class="col-md-6 border-end">
+					<h5 class="text-primary"><i class="bi bi-info-circle"></i> Dados da Atividade</h5>
+					<p class="mt-3"><strong>Matéria:</strong> @Model.Materia</p>
+					<p><strong>Atividade:</strong> @Model.NomeAtividade</p>
+					<p><strong>Dificuldade:</strong> <span class="badge bg-@corFundo">@Model.Dificuldade</span></p>
+				</div>
+				<div class="col-md-6 ps-4">
+					<h5 class="text-success"><i class="bi bi-calendar-check"></i> Cronograma</h5>
+					<div class="alert alert-@corFundo mt-3 shadow-sm">
+						<i class="bi bi-lightbulb"></i> @Model.FrequenciaEstudo
+					</div>
+				</div>
+			</div>
+			<div class="mt-4">
+				<h6>Progresso: @Model.Progresso%</h6>
+				<div class="progress" style="height: 25px;">
+					<div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+						 role="progressbar" style="width: @(Model.Progresso)%">
+						@(Model.Progresso)%
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

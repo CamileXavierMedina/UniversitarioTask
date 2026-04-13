@@ -1,0 +1,85 @@
+﻿@model UniversitarioTask.Site.Models.Tarefa
+
+@{
+	ViewData["Title"] = "Adicionar Itens";
+}
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card shadow-lg border-0">
+                
+				@* CABEÇALHO COM A SETA ADICIONADA *@
+				<div class="card-header bg-dark text-white d-flex align-items-center py-3">
+					<a href="javascript:void(0)" onclick="history.back()" class="text-white me-3" style="text-decoration: none;">
+						<i class="bi bi-arrow-left-short fs-2"></i>
+					</a>
+					<h4 class="mb-0 flex-grow-1 text-center" style="margin-left: -40px;">📝 Cadastrar Nova Atividade</h4>
+				</div>
+                
+				<div class="card-body p-4">
+					<form id="formTarefa">
+						<div class="mb-3">
+							<label class="form-label fw-bold">Matéria</label>
+							<input type="text" class="form-control" id="materia" placeholder="Ex: C#, Banco de Dados..." required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label fw-bold">Nome da Atividade</label>
+							<input type="text" class="form-control" id="atividade" placeholder="Ex: Prova Mensal..." required>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label class="form-label fw-bold">Data de Entrega/Prova</label>
+								<input type="date" class="form-control" id="data" required>
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<label class="form-label fw-bold">Tipo</label>
+								<select class="form-select" id="tipo" required>
+									<option value="">Selecione...</option>
+									<option value="0">📝 Entrega</option>
+									<option value="1">🎓 Prova</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label fw-bold">Prioridade (Dificuldade)</label>
+							<select class="form-select" id="prioridade" required>
+								<option value="1">🟢 Fácil</option>
+								<option value="2" selected>🟡 Médio</option>
+								<option value="3">🔴 Difícil</option>
+							</select>
+						</div>
+
+						<div class="d-grid gap-2 mt-4">
+							<button type="submit" class="btn btn-primary btn-lg shadow-sm">Salvar Item</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		document.getElementById('formTarefa').addEventListener('submit', function (event) {
+			event.preventDefault();
+            
+			const materia = document.getElementById('materia').value;
+			const atividade = document.getElementById('atividade').value;
+			const data = document.getElementById('data').value;
+			const tipo = document.getElementById('tipo').value;
+
+			if (!materia || !atividade || !data || !tipo) {
+				alert("Preencha os campos vazios");
+			} else {
+				alert("Tarefa salva com sucesso! (Simulação)");
+				window.location.href = '/';
+			}
+		});
+	</script>
+}
