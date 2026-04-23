@@ -1,6 +1,19 @@
 ﻿@model List<UniversitarioTask.Site.Models.Tarefa>
+@using UniversitarioTask.Site.Models
 
 <div class="container mt-4">
+    @if (ViewBag.Feriados is List<FeriadoModel> feriados && feriados.Any())
+    {
+        <div class="alert alert-light border shadow-sm mb-4">
+            <strong>Próximos Feriados:</strong>
+            <small class="text-muted">
+                @{
+                    var topFeriados = feriados.Take(5).Select(f => $"{DateTime.Parse(f.Date):dd/MM} ({f.Name})");
+                    @string.Join(", ", topFeriados)
+                }
+            </small>
+        </div>
+    }
 	<table class="table table-hover shadow-sm">
 		<thead class="table-dark">
 			<tr>

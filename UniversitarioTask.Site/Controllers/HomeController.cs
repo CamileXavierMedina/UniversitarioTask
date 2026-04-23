@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using UniversitarioTask.Site.Models;
+using UniversitarioTask.Site.Services;
 
 namespace UniversitarioTask.Site.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private readonly FeriadoService _feriadoService;
+
+        public HomeController(FeriadoService feriadoService)
+        {
+            _feriadoService = feriadoService;
+        }
+
         private static List<Tarefa> listaDeTarefas = new List<Tarefa>
         {
             new Tarefa("C# e .NET", "Trabalho MVC", DateTime.Now.AddDays(2), NivelDificuldade.Dificil, TipoAtividade.Entrega, "Seg, Qua e Sex (2h)", 45),
@@ -13,7 +20,14 @@ namespace UniversitarioTask.Site.Controllers
             new Tarefa("Algoritmos", "Lista 1", DateTime.Now.AddDays(10), NivelDificuldade.Facil, TipoAtividade.Entrega, "Sábado (3h)", 90)
         };
 
-        public IActionResult Index() => View(listaDeTarefas);
+        public async IActionResult Index()
+        {
+            var feriados = await _feriadoService.BuscarFeriados(DateTime.Now.Year);
+
+            ViewBag.Feriados = feriados;
+
+            return View(listaDeTarefas);
+        }
 
         public IActionResult Adicionar() => View();
 
