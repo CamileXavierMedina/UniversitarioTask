@@ -3,84 +3,72 @@
 
 <div class="container mt-4">
     
-	@* MENSAGEM DE SUCESSO: Exibida após redirecionamento do cadastro *@
+	
 	@if (TempData["MensagemSucesso"] != null)
 	{
-		<div class="alert alert-success alert-dismissible fade show shadow-sm border-start border-4 border-success" role="alert">
+		<div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
 			<i class="bi bi-check-circle-fill me-2"></i> @TempData["MensagemSucesso"]
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 	}
 
-	@* PAINEL DE FERIADOS: Filtra apenas os feriados do mês vigente *@
+	
 	@if (ViewBag.FeriadosDoMes is List<FeriadoModel> feriadosMes && feriadosMes.Any())
 	{
-		<div class="card mb-4 border-0 shadow-sm">
-			<div class="card-header bg-primary text-white py-2">
-				<h6 class="mb-0"><i class="bi bi-calendar3 me-2"></i>Feriados Nacionais de @DateTime.Now.ToString("MMMM")</h6>
-			</div>
-			<div class="card-body bg-light">
+		<div class="card mb-4 border-0 shadow-sm" style="background-color: #2c3e50; color: white;">
+			<div class="card-body">
+				<h6 class="mb-3">
+					<i class="bi bi-calendar3 me-2"></i> Feriados de @DateTime.Now.ToString("MMMM")
+				</h6>
 				<div class="d-flex flex-wrap gap-2">
 					@foreach (var f in feriadosMes)
 					{
-						<div class="p-2 bg-white rounded border shadow-sm d-flex align-items-center">
-							<span class="badge bg-primary me-2">@DateTime.Parse(f.Date).ToString("dd/MM")</span>
-							<span class="small fw-bold text-dark">@f.Name</span>
+						<div class="p-2 rounded border border-secondary" style="background-color: #34495e;">
+							<span class="badge bg-light text-dark me-2">@DateTime.Parse(f.Date).ToString("dd/MM")</span>
+							<span class="small fw-bold">@f.Name</span>
 						</div>
 					}
 				</div>
 			</div>
 		</div>
 	}
-	else
-	{
-		<div class="alert alert-light border shadow-sm py-2 mb-4">
-			<i class="bi bi-info-circle text-primary me-2"></i> Não existem feriados nacionais registados para o mês de @DateTime.Now.ToString("MMMM").
-		</div>
-	}
 
-	@* LISTAGEM DE TAREFAS *@
-	<div class="card shadow-sm border-0">
+	
+	<div class="card shadow-sm">
 		<div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-			<h5 class="mb-0">Lista de Atividades Académicas</h5>
-			<a asp-action="Adicionar" class="btn btn-success btn-sm fw-bold">
-				<i class="bi bi-plus-lg"></i> Nova Tarefa
-			</a>
+			<h5 class="mb-0">Minhas Atividades Acadêmicas</h5>
+			
+			<a asp-action="Adicionar" class="btn btn-secondary btn-sm shadow-sm">Nova Tarefa</a>
 		</div>
 		<div class="table-responsive">
 			<table class="table table-hover align-middle mb-0">
 				<thead class="table-light">
 					<tr>
-						<th style="width: 25%">Matéria</th>
-						<th style="width: 35%">Atividade</th>
-						<th style="width: 20%">Entrega</th>
-						<th style="width: 20%">Dificuldade</th>
+						<th>Matéria</th>
+						<th>Atividade</th>
+						<th>Data de Entrega</th>
+						<th>Dificuldade</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach (var item in Model.OrderBy(t => t.Data))
 					{
 						<tr>
-							<td><span class="text-secondary small">#</span> @item.Materia</td>
+							
+							<td>@item.Materia</td>
 							<td>
-								<a href="/Home/Detalhes?id=@item.Id" class="fw-bold text-dark text-decoration-none hover-primary">
+								<a href="/Home/Detalhes?id=@item.Id" class="fw-bold text-dark text-decoration-none">
 									@item.NomeAtividade
 								</a>
 
-								@* ALERTA DE FERIADO: Gerado dinamicamente pela Controller *@
 								@if (ViewData[$"Alerta_{item.Id}"] != null)
 								{
-									<div class="badge bg-danger-subtle text-danger border border-danger-subtle d-block mt-1" style="width: fit-content;">
-										<i class="bi bi-exclamation-triangle-fill me-1"></i> @ViewData[$"Alerta_{item.Id}"]
+									<div class="text-danger mt-1" style="font-size: 0.8rem;">
+										<strong><i class="bi bi-exclamation-triangle"></i> @ViewData[$"Alerta_{item.Id}"]</strong>
 									</div>
 								}
 							</td>
-							<td>
-								<div class="d-flex flex-column">
-									<span class="fw-bold">@item.Data.ToString("dd/MM/yyyy")</span>
-									<small class="text-muted text-capitalize">@item.Data.ToString("dddd")</small>
-								</div>
-							</td>
+							<td>@item.Data.ToString("dd/MM/yyyy")</td>
 							<td>
 								<span class="badge bg-@(item.Dificuldade == NivelDificuldade.Dificil ? "danger" : (item.Dificuldade == NivelDificuldade.Medio ? "warning" : "success"))">
 									@item.Dificuldade

@@ -8,13 +8,12 @@ namespace UniversitarioTask.Site.Controllers
     {
         private readonly FeriadoService _feriadoService;
 
-        // Injeção do serviço de feriados via construtor
         public HomeController(FeriadoService feriadoService)
         {
             _feriadoService = feriadoService;
         }
 
-        // A lista DEVE ser static para que os dados persistam na memória enquanto a aplicação corre
+        // Lista estática para simular persistência em memória
         private static List<Tarefa> listaDeTarefas = new List<Tarefa>
         {
             new Tarefa("C# e .NET", "Trabalho MVC", new DateTime(2026, 04, 21), NivelDificuldade.Dificil, TipoAtividade.Entrega, "Seg, Qua e Sex (2h)", 45),
@@ -24,66 +23,61 @@ namespace UniversitarioTask.Site.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // 1. Procura todos os feriados de 2026 através da Brasil API
+            //Procura os feriados
             var feriados = await _feriadoService.BuscarFeriados(2026);
 
             if (feriados != null)
             {
-                // 2. Lógica para o Painel Superior: Filtrar apenas feriados do MÊS ATUAL
+                //FILTRO PARA feriados do MÊS
                 var mesAtual = DateTime.Now.Month;
-                var feriadosDoMes = feriados
+                ViewBag.FeriadosDoMes = feriados
                     .Where(f => DateTime.Parse(f.Date).Month == mesAtual)
                     .ToList();
 
-                ViewBag.FeriadosDoMes = feriadosDoMes;
-
-                // 3. Lógica de Alerta na Tabela: Verifica se cada tarefa coincide com um feriado
+                //Ve se alguma tarefa coincide com feriado
                 foreach (var tarefa in listaDeTarefas)
                 {
                     if (feriados.Any(f => DateTime.Parse(f.Date).Date == tarefa.Data.Date))
                     {
                         var nomeFeriado = feriados.First(f => DateTime.Parse(f.Date).Date == tarefa.Data.Date).Name;
-                        ViewData[$"Alerta_{tarefa.Id}"] = $"Data coincide com o feriado: {nomeFeriado}!";
+                        ViewData[$"Alerta_{tarefa.Id}"] = $" Coincide com  o feriado: {nomeFeriado}";
                     }
                 }
             }
 
-            // Retorna a lista completa (incluindo as novas atividades adicionadas)
             return View(listaDeTarefas);
         }
 
-        // Abre a página do formulário de cadastro (GET)
         [HttpGet]
         public IActionResult Adicionar() => View();
 
-        // Recebe os dados do formulário e guarda na lista (POST)
+        
         [HttpPost]
-        public IActionResult Adicionar(Tarefa novaTarefa)
+        public IActionResult Adicionar([FromForm] Tarefa novaTarefa)
         {
-            if (novaTarefa != null)
+            
+            if (novaTarefa == null)
             {
-                // Garante que a tarefa tenha um identificador único (GUID)
-                // Isto é essencial para o ViewData de alertas funcionar na Index
-                if (novaTarefa.Id == Guid.Empty) novaTarefa.Id = Guid.NewGuid();
-
-                // Adiciona o novo item à nossa lista estática
-                listaDeTarefas.Add(novaTarefa);
-
-                // Define a mensagem de sucesso que a Index irá exibir através do TempData
-                TempData["MensagemSucesso"] = "Atividade guardada com sucesso! 🚀";
-
-                // Redireciona para a Index para recarregar a lista e processar os feriados
-                return RedirectToAction("Index");
+                return View();
             }
 
-            return View(novaTarefa);
+           
+            if (novaTarefa.Id == Guid.Empty) novaTarefa.Id = Guid.NewGuid();
+
+           
+            listaDeTarefas.Add(novaTarefa);
+
+           
+            TempData["MensagemSucesso"] = "Atividade guardada com sucesso! ✅";
+
+            // REDIRECIONA para a Index para atualizar a lista automaticamente
+            return RedirectToAction("Index");
         }
 
         public IActionResult Detalhes(Guid id)
         {
             var tarefa = listaDeTarefas.FirstOrDefault(t => t.Id == id);
             if (tarefa == null) return RedirectToAction("Index");
-
             return View(tarefa);
         }
     }
