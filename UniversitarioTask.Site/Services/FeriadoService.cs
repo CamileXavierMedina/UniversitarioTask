@@ -18,7 +18,7 @@ namespace UniversitarioTask.Site.Services
             try
             {
                 var url = $"https://brasilapi.com.br/api/feriados/v1/{ano}";
-                var feriados = await _httpClient.getFromJsonAsync<List<FeriadoModel>>(url);
+                var feriados = await _httpClient.GetFromJsonAsync<List<FeriadoModel>>(url);
                 return feriados ?? new List<FeriadoModel>();
             }
             catch
