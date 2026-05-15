@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="UniversitarioTask.Site/UniversitarioTask.Site.csproj" Id="b05bccd1-9362-4e17-8ac6-235904f01af9" />
+  <Project Path="UniversitarioTask.Tests/UniversitarioTask.Tests.csproj" Id="f6d58d63-88d7-430f-8815-889796d9aa41" />
 </Solution>
