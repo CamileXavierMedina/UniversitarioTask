@@ -1,24 +1,64 @@
 ![.NET CI](https://github.com/CamileXavierMedina/UniversitarioTask/actions/workflows/dotnet.yml/badge.svg)
 
-# 🎓 UniversitarioTask
+# UniversitarioTask
 
-## 1. Definição do Programa
-
-O ambiente académico exige a gestão simultânea de múltiplas disciplinas, atividades e prazos apertados. A **UniversitarioTask** é uma aplicação web centralizada desenhada para ajudar estudantes a gerirem as suas tarefas de forma inteligente, integrando dados reais de feriados para evitar conflitos de prazos.
-
-A fragmentação das informações académicas, associada à ausência de uma organização estratégica de estudos, pode resultar frequentemente em:
-
-* Perda de prazos importantes;
-* Sobrecarga cognitiva;
-* Dificuldade na priorização de atividades;
-* Planeamento ineficiente da carga horária.
-
-A solução propõe uma experiência centralizada, simples e inteligente para auxiliar estudantes no controlo das suas rotinas académicas.
+Aplicação Web desenvolvida em ASP.NET Core MVC para gestão de atividades académicas com integração de serviços de feriados nacionais.
 
 ---
 
+## 1. Descrição do Projeto
+
+O **UniversitarioTask** é um sistema desenvolvido para auxiliar estudantes na organização de tarefas, provas e prazos académicos.  
+
+O principal diferencial da aplicação é a integração com a **Brasil API**, permitindo identificar automaticamente se uma entrega coincide com um feriado nacional, auxiliando no planeamento da rotina de estudos.
+
+O sistema centraliza informações académicas em uma interface simples e organizada, reduzindo problemas como:
+
+- Perda de prazos;
+- Sobrecarga de atividades;
+- Falta de priorização;
+- Planeamento ineficiente da carga horária.
+
+---
+
+## 2. Funcionalidades Principais
+
+### Gestão de Atividades
+- Cadastro de tarefas académicas;
+- Listagem organizada de atividades;
+- Visualização de detalhes;
+- Controle de progresso das tarefas.
+
+### Planeamento Inteligente
+O sistema sugere frequência de estudos com base no nível de dificuldade da atividade.
+
+| Dificuldade | Frequência Recomendada |
+| :--- | :--- |
+| Fácil | 1 sessão semanal |
+| Médio | 2 sessões semanais |
+| Difícil | 3 sessões semanais |
+
+### Integração com API Externa
+- Consumo automático da Brasil API;
+- Consulta de feriados nacionais em tempo real;
+- Validação de conflitos entre entregas e dias não úteis.
+
+### Alertas de Conflito
+Notificações visuais são exibidas quando uma tarefa coincide com um feriado nacional.
+
+### Painel de Feriados
+Exibição dos feriados do mês vigente diretamente na página inicial.
+
+### Persistência em Memória
+Utilização de coleções estáticas para manutenção temporária de dados durante a execução da aplicação.
+
+---
+
+## 3. Arquitetura do Sistema
+
 ```mermaid
 classDiagram
+
     class Tarefa {
         +Guid Id
         +String Materia
@@ -36,148 +76,96 @@ classDiagram
         +Detalhes(Guid id)
     }
 
-    class BrasilAPI {
+    class BrasilApiService {
         +ConsultarFeriados()
     }
 
     Tarefa --* HomeController
-    HomeController --> BrasilAPI
+    HomeController --> BrasilApiService
 ```
 
 ---
 
-## 🚀 2. Funcionalidades Principais
+## 4. Tecnologias Utilizadas
 
-### 📚 Gestão de Atividades
-
-Permite o registo detalhado de provas, trabalhos e entregas académicas, incluindo:
-
-* Nome da disciplina;
-* Tipo da atividade;
-* Data limite;
-* Grau de dificuldade;
-* Acompanhamento de progresso.
-
-### 🧠 Planeamento Inteligente
-
-O sistema realiza sugestões automáticas de frequência de estudo conforme a complexidade da atividade.
-
-| Nível de Dificuldade | Recomendação de Estudo | Impacto no Cronograma    |
-| :------------------- | :--------------------- | :----------------------- |
-| **Fácil**            | 1 Sessão semanal       | Revisão básica           |
-| **Médio**            | 2 Sessões semanais     | Consolidação de conteúdo |
-| **Difícil**          | 3 Sessões semanais     | Estudo intensivo         |
-
-### 📅 Integração com Brasil API
-
-A aplicação consulta automaticamente os feriados nacionais através da Brasil API para:
-
-* Alertar sobre entregas coincidentes com feriados;
-* Auxiliar no planeamento académico;
-* Exibir feriados relevantes diretamente na Home.
-
-### 🖥️ Painel Inteligente
-
-A Home da aplicação apresenta:
-
-* Lista de atividades prioritárias;
-* Feriados do mês vigente;
-* Organização cronológica das tarefas;
-* Alertas visuais de prazos críticos.
+| Categoria | Tecnologias |
+| :--- | :--- |
+| Framework | ASP.NET Core MVC (.NET 8) |
+| Linguagem | C# |
+| Frontend | Razor Pages, Bootstrap 5, Bootstrap Icons |
+| API Externa | Brasil API |
+| Testes | xUnit + WebApplicationFactory |
+| Containerização | Docker |
+| Versionamento | Git + GitHub |
 
 ---
 
-## 🛠️ 3. Tecnologias Utilizadas
+## 5. Estrutura de Testes
 
-### Back-end
+O projeto inclui testes de integração para validação das principais rotas e funcionalidades da aplicação.
 
-* ASP.NET Core MVC (.NET 8)
-* C#
+### Testes Implementados
 
-### Front-end
+| Teste | Objetivo |
+| :--- | :--- |
+| `Get_Index_RetornaSucesso` | Valida carregamento da Home |
+| `Post_Adicionar_DeveRedirecionar` | Verifica fluxo de cadastro |
+| `Get_Adicionar_DeveCarregarTela` | Valida acesso ao formulário |
 
-* Razor Pages
-* Bootstrap 5
-* Bootstrap Icons
-
-### Consumo de API
-
-* HttpClient
-* Integração com Brasil API
-
-### Testes Automatizados
-
-* xUnit
-* WebApplicationFactory
-
-### Infraestrutura
-
-* Docker
-* Docker Compose
-
-### Boas Práticas
-
-* Organização em arquitetura MVC;
-* Separação de responsabilidades;
-* Testes automatizados de integração;
-* Estrutura preparada para CI/CD.
+### Garantias de Qualidade
+- Validação das rotas principais;
+- Verificação da lógica de negócio;
+- Testes automatizados de navegação;
+- Validação do redirecionamento HTTP.
 
 ---
 
-## 🧪 4. Garantia de Qualidade (Testes)
+## 6. Como Executar a Aplicação
 
-O projeto possui uma suite de testes automatizados para garantir estabilidade, funcionamento correto e confiabilidade do sistema.
-
-### ✔️ Navegação
-
-Valida se as páginas principais carregam corretamente sem erros.
-
-### ✔️ Persistência em Memória
-
-Confirma se uma atividade adicionada via formulário:
-
-* É armazenada corretamente;
-* Gera o redirecionamento esperado (`302 Redirect`).
-
-### ✔️ Lógica de Negócio
-
-Verifica se os alertas de feriados são exibidos corretamente quando as datas coincidem com entregas académicas.
+### Pré-requisitos
+- .NET 8 SDK
+- Docker (opcional)
+- Git
 
 ---
 
-## 📦 5. Como Executar o Projeto
+### Execução Local
 
-### 💻 Execução Local (Visual Studio)
-
-#### Pré-requisitos
-
-* Visual Studio 2022;
-* .NET SDK 8 instalado;
-* Git instalado.
-
-#### Passos
-
-1. Clonar o repositório:
+Clone o repositório:
 
 ```bash
 git clone https://github.com/CamileXavierMedina/UniversitarioTask.git
 ```
 
-2. Abrir o arquivo `.sln` no Visual Studio 2022.
+Acesse a pasta do projeto:
 
-3. Pressionar `F5` para executar o projeto.
+```bash
+cd UniversitarioTask
+```
+
+Restaure as dependências:
+
+```bash
+dotnet restore
+```
+
+Execute a aplicação:
+
+```bash
+dotnet run --project UniversitarioTask.Site
+```
 
 ---
 
-### 🐳 Execução com Docker
+### Execução com Docker
 
-#### Build da aplicação
+Build da imagem:
 
 ```bash
 docker build -t universitariotask .
 ```
 
-#### Execução do container
+Execução do container:
 
 ```bash
 docker run -p 10000:10000 universitariotask
@@ -185,25 +173,25 @@ docker run -p 10000:10000 universitariotask
 
 ---
 
-## 🌐 6. Link da Aplicação
+## 7. Demonstração Online
 
-O deploy da aplicação foi realizado utilizando containers Docker.
+A aplicação encontra-se publicada no Render:
 
-👉 **UniversitarioTask no Render**
+🔗 https://niversitariotask-camile.onrender.com/
 
-> **Nota:** O primeiro carregamento pode demorar alguns segundos devido ao modo de suspensão da hospedagem gratuita.
+> Nota: O primeiro carregamento pode demorar alguns segundos devido ao modo de suspensão da hospedagem gratuita.
 
 ---
 
-## 📋 7. Estrutura do Projeto
+## 8. Estrutura do Projeto
 
 ```bash
 UniversitarioTask/
 │
 ├── Controllers/
 ├── Models/
-├── Views/
 ├── Services/
+├── Views/
 ├── wwwroot/
 ├── Tests/
 ├── Dockerfile
@@ -213,31 +201,26 @@ UniversitarioTask/
 
 ---
 
-## 🔍 8. Diferenciais do Projeto
+## 9. Diferenciais do Projeto
 
-* Integração com API externa em tempo real;
-* Gestão inteligente de tarefas académicas;
-* Alertas automáticos de feriados;
-* Planeamento de estudos baseado em dificuldade;
-* Arquitetura moderna utilizando ASP.NET Core MVC;
-* Preparado para deploy com Docker.
-
----
-
-## 👩‍💻 Autor
-
-#### **Camile Xavier Medina**
-
-### 📚 Disciplina
-
-Desenvolvimento de Software
-
-### 📅 Data
-
-Maio de 2026
+- Integração com API externa em tempo real;
+- Aplicação desenvolvida com arquitetura MVC;
+- Testes automatizados de integração;
+- Deploy utilizando Docker;
+- Interface responsiva com Bootstrap;
+- Sistema de organização académica inteligente.
 
 ---
 
-## 📌 Versão
+## 10. Autora
+
+**Camile Xavier Medina**  
+
+Disciplina: Bootcamp II - Análise e Desenvolvimento de Sistemas 
+Data: 14 de Maio de 2026
+
+---
+
+## Versão
 
 `v1.0.0`
