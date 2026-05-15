@@ -7,6 +7,8 @@ COPY . ./
 
 RUN dotnet publish UniversitarioTask.Site/UniversitarioTask.Site.csproj -c Release -o /app/out
 
+RUN ls -la /app/out
+
 # ETAPA 2: Ambiente de Execução (Usa apenas o Runtime, mais leve)
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
