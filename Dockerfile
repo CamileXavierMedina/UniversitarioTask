@@ -19,4 +19,4 @@ COPY --from=build /app/out .
 # Expõe a porta que o Render vai usar
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "UniversitarioTask.dll"]
+ENTRYPOINT ["dotnet", "UniversitarioTask.Site.dll"]
