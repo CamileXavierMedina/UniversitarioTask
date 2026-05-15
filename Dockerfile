@@ -5,7 +5,7 @@ WORKDIR /app
 # Copia tudo da sua máquina para o container
 COPY . ./
 
-RUN dotnet publish src/UniversitarioTask.Site/UniversitarioTask.Site.csproj -c Release -o /app/out
+RUN dotnet publish UniversitarioTask.Site/UniversitarioTask.Site.csproj -c Release -o /app/out
 
 # ETAPA 2: Ambiente de Execução (Usa apenas o Runtime, mais leve)
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
