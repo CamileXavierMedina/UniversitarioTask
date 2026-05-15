@@ -1,5 +1,5 @@
 # ETAPA 1: Ambiente de Compilação (Usa o SDK do .NET)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /app
 
 # Copia tudo da sua máquina para o container
@@ -9,7 +9,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # ETAPA 2: Ambiente de Execução (Usa apenas o Runtime, mais leve)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 
 # Copia só os arquivos compilados da etapa 1
